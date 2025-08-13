@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
+
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+body {
+  font-family: "Lora", serif;
+}
+
+.gradient-color {
+  background: linear-gradient(to bottom, #a67af7 0%, #540bdd 100%);
+  color: #f7f7f7;
+}

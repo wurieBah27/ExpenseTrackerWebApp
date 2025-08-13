@@ -1,0 +1,27 @@
+{
+  "name": "QX Budget App",
+  "short_name": "QX",
+  "description": "A Vite-powered web application.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#646cff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logoo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logoo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "logoo.png",
+      "sizes": "512x512",
+      "type": "image/avif"
+    }
+  ]
+}
