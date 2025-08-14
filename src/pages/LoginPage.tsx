@@ -1,6 +1,7 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { LogInUser } from "../features/user/useLoginOutUser";
 
 type Inputs = {
   email: string;
@@ -14,8 +15,12 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const { signIn } = LogInUser();
 
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    signIn({ email: data.email, password: data.password });
+  };
   return (
     <div className="py-10">
       <div className="flex flex-col items-center justify-center gap-5">

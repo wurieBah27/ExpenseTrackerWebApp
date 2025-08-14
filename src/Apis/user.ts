@@ -7,12 +7,15 @@ import { auth, db } from "./firebaseConfig";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import uploadFile from "./uploadFiles";
 
-type CreateNewUser = {
+type UserEmailPassword = {
   email: string;
   password: string;
+};
+
+type CreateNewUser = {
   userData: object;
   userProfile: object;
-};
+} & UserEmailPassword;
 
 type CreateUserAccountParams = {
   userData: object;
@@ -78,7 +81,7 @@ export const createNewUser = async ({
 /* create new user in Database */
 
 /* log-in user */
-export const signInUser = async ({ email, password }: CreateNewUser) => {
+export const signInUser = async ({ email, password }: UserEmailPassword) => {
   try {
     return signInWithEmailAndPassword(auth, email, password);
   } catch (error) {

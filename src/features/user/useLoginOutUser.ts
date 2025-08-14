@@ -15,7 +15,8 @@ export const LogInUser = () => {
       navigate("/");
       toast.success("User logged in successfully!");
     },
-    onError: () => {
+    onError: (data) => {
+      console.log(data.message);
       toast.error("We encountered an Error 🚫!");
     },
   });
