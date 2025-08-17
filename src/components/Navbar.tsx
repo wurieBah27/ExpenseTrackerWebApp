@@ -19,7 +19,7 @@ export type User = {
 };
 
 const Navbar = () => {
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const { data, uid } = getUser();
   const { transactions } = useGetAllTransactions() as {
     transactions: Transaction[];
