@@ -3,8 +3,12 @@ import { getUser } from "../features/user/useGetCurrentUser";
 import useGetAllTransactions from "../features/transactions/useGetAllTransactions";
 import type { Transaction } from "./SavingsReport";
 import { calculateTotal } from "../helpers/helperFunc";
-import { Button } from "flowbite-react";
+import { Avatar, Button, DropdownItem } from "flowbite-react";
 import { HiPlus } from "react-icons/hi";
+import DropdownComponent from "./Dropdown";
+import ModalComponent from "./Modal";
+import { useState } from "react";
+import { LogOutUser } from "../features/user/useLoginOutUser";
 
 export type User = {
   profileUrl?: string;
@@ -15,10 +19,14 @@ export type User = {
 };
 
 const Navbar = () => {
-  const { data } = getUser();
+  const [openModal, setOpenModal] = useState(true);
+  const { data, uid } = getUser();
   const { transactions } = useGetAllTransactions() as {
     transactions: Transaction[];
   };
+
+  /*  log out function */
+  const { signOut } = LogOutUser();
 
   const totalIncome = calculateTotal(transactions, "Income");
   const totalExpense = calculateTotal(transactions, "Expense");
@@ -28,30 +36,51 @@ const Navbar = () => {
   const profileUrl = user?.profileUrl;
   const currencyPreference = user?.currencyPreference;
 
+  const handleOpenModal = () => setOpenModal(!openModal);
+  const handleSignoutUser = () => {
+    signOut();
+    setOpenModal(false);
+  };
+
   return (
     <header className="">
       <div className="mx-auto max-w-screen-xl border-b border-gray-100 px-2 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between max-[360px]:h-16">
-          <Link to="/login">
+          {uid && (
             <div className="flex items-center gap-12">
-              <div className="relative flex flex-col items-start">
-                <span className="overflow-hidden rounded-full border">
-                  <span className="sr-only">Toggle dashboard menu </span>
-
-                  <img
-                    src={
-                      profileUrl ||
-                      "https://plus.unsplash.com/premium_photo-1676782583940-633240617c78?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    }
-                    alt=""
-                    className="size-10 object-cover max-[360px]:size-7"
-                  />
-
-                  {/* <Avatar /> */}
-                </span>
-              </div>
+              <DropdownComponent
+                RenderTrigerChildren={
+                  <div className="relative flex flex-col items-start">
+                    <span className="overflow-hidden rounded-full border">
+                      <span className="sr-only">Toggle dashboard menu </span>
+                      {profileUrl && (
+                        <img
+                          src={profileUrl}
+                          alt=""
+                          className="size-10 object-cover max-[360px]:size-7"
+                        />
+                      )}
+                      {!profileUrl && <Avatar />}{" "}
+                    </span>
+                  </div>
+                }
+                hideDropdown={true}
+              >
+                <Link to={"/account"}>
+                  {" "}
+                  <DropdownItem>Account</DropdownItem>
+                </Link>
+                <DropdownItem onClick={handleOpenModal}>
+                  <span className="text-red-500">Log out</span>
+                </DropdownItem>
+              </DropdownComponent>
             </div>
-          </Link>
+          )}
+          {!uid && (
+            <Link to="/login">
+              <Button>Login in</Button>
+            </Link>
+          )}
           <div className="flex items-center gap-12">
             <div>
               <div className="flex items-baseline gap-2 sm:gap-3">
@@ -78,6 +107,21 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <ModalComponent
+        title=""
+        openModal={openModal}
+        setOpenModal={handleOpenModal}
+      >
+        <div className="flex flex-col flex-wrap items-center gap-10">
+          <h4>Are you sure you want to log out ?</h4>
+          <div className="flex items-center gap-2">
+            <Button color={"red"} onClick={handleSignoutUser}>
+              Yes ?
+            </Button>
+            <Button onClick={handleOpenModal}>Decline</Button>
+          </div>
+        </div>
+      </ModalComponent>
     </header>
   );
 };

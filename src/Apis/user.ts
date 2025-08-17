@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import { auth, db } from "./firebaseConfig";
 import { addDoc, collection, getDocs } from "firebase/firestore";
@@ -91,9 +92,9 @@ export const signInUser = async ({ email, password }: UserEmailPassword) => {
 };
 
 /* Log-out user  */
-export const signOutUser = async ({ email, password }: CreateNewUser) => {
+export const signOutUser = async () => {
   try {
-    return signInWithEmailAndPassword(auth, email, password);
+    return signOut(auth);
   } catch (error: any) {
     const errorMessage = error;
 

@@ -34,7 +34,6 @@ const getAllTransactions = async ({
     let data: object[] = [];
     const docRef = collection(db, "users", id, "transactions");
     // const q = query(docRef, where("type", "==", "expense"));
-    console.log(startOfMonth, endOfMonth);
     const q = query(
       docRef,
       where("date", ">=", startOfMonth),

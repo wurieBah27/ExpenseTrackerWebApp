@@ -12,7 +12,6 @@ const DateTester = () => {
 
   if (period) {
     dateFromSearchParams = JSON.parse(period);
-    console.log(typeof dateFromSearchParams); // { monthlyPeriod: 'July-2025', startOfMonth: '2025-07-01T00:00:00.000Z' }
   }
   // const dateFromSearchParams = period;
 
@@ -37,8 +36,6 @@ const DateTester = () => {
     : startOfMonths;
 
   const startOfMonth = new Date(searchDateStart) || startOfMonths;
-
-  console.log(new Date(startOfMonth));
 
   const searchDateEnd = new Date(searchDateStart);
 

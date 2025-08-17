@@ -49,7 +49,12 @@ const UserProfile = () => {
           <Datepicker labelTodayButton="Today" labelClearButton="Clear" />
         </div>
 
-        <Button type="submit">Update Profile</Button>
+        <div className="mt-10 flex items-center gap-4">
+          <Button type="submit">Log out</Button>
+          <Button type="submit" color={"red"}>
+            Delete Account
+          </Button>
+        </div>
       </form>
     </div>
   );

@@ -12,7 +12,6 @@ const useGetAllTransactions = () => {
 
   if (period) {
     myObject = JSON.parse(period);
-    console.log(typeof myObject); // { monthlyPeriod: 'July-2025', startOfMonth: '2025-07-01T00:00:00.000Z' }
   }
   const now = new Date();
 

@@ -1,22 +1,24 @@
-import { Button, Dropdown, DropdownItem } from "flowbite-react";
-import { HiFilter } from "react-icons/hi";
+import { Dropdown } from "flowbite-react";
+import type React from "react";
 
-const DropdownComponent = () => {
+type DropdownComponentProps = {
+  RenderTrigerChildren: React.ReactElement;
+  children: React.ReactNode;
+  hideDropdown: boolean;
+};
+const DropdownComponent = ({
+  RenderTrigerChildren,
+  children,
+  hideDropdown,
+}: DropdownComponentProps) => {
   return (
     <div>
       <Dropdown
         label=""
-        dismissOnClick={false}
-        renderTrigger={() => (
-          <Button color={"teal"} size="xs" className="flex items-center gap-2">
-            <span>Filter</span> <HiFilter />
-          </Button>
-        )}
+        dismissOnClick={hideDropdown}
+        renderTrigger={() => RenderTrigerChildren}
       >
-        <DropdownItem>Last Month</DropdownItem>
-        <DropdownItem>Last 2 Months</DropdownItem>
-        <DropdownItem>Last 3 Months</DropdownItem>
-        <DropdownItem>Select Date</DropdownItem>
+        {children}
       </Dropdown>
     </div>
   );

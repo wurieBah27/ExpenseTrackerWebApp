@@ -99,7 +99,7 @@ const SIngleTransaction = ({
                       <Button color={"red"} onClick={handleDeleteTransaction}>
                         Yes Delete ?
                       </Button>
-                      <Button>Decline</Button>
+                      <Button onClick={handleOpenModal}>Decline</Button>
                     </div>
                   </div>
                 </ModalComponent>
