@@ -89,6 +89,7 @@ const NewExpenseForm = () => {
         <div>
           <TextInput
             id="amount"
+            step={"any"}
             placeholder="$ 135"
             type="number"
             {...register("amount", { required: true })}
